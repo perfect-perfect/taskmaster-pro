@@ -13,25 +13,102 @@
 <body>
 
   <div class="row min-vh-100 no-gutters">
-    <header class="col-12 col-lg-3 bg-dark text-light d-flex flex-column p-4 p-lg-3">
+    <!-- sticky-top makes the header stick to the top // d-flex and flex column relate to flex// p-4 and p-lg-3 are both spacing bootstrap utilities -->
+    <header class="col-12 col-lg-3 bg-dark text-light sticky-top d-flex flex-column p-4 p-lg-3">
       <h1 class="text-center">Taskmaster Pro Edition</h1>
-      <button id="create-task" class="btn btn-block btn-success" data-toggle="modal" data-target="#task-form-modal">Add
-        Task</button>
+                                                                                     <!-- this is a Bootstrap custom data attribute to connect a button to the modal that it opens. modals is near the bottom of HTML -->
+      <button id="create-task" class="btn btn-block btn-success" data-toggle="modal" data-target="#task-form-modal">
+        Add Task
+      </button>
       <button id="remove-tasks" class="btn btn-block btn-danger">Delete All Tasks</button>
-      <p class="mt-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas architecto ipsa
+      <!-- mt-auto puts all unused space in the <header> element on top of the <p> element instead of keeping it below, this is onlt possivle beacause the <header> is set up as a column -->
+      <!-- d-none and d-lg-block both hide elements depending on the size of the screen. -->
+      <p class="mt-auto d-none d-lg-block">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas architecto ipsa
         excepturi aut non
         laudantium sequi fugit officiis optio deleniti asperiores rem eius laborum maxime blanditiis culpa, quis iste?
       </p>
     </header>
-    <main class="col-12 col-lg-9">
-      <div class="m-5">
-        <h2>To Do</h2>
-        <ul id="list-toDo" class="list-group"> </ul>
+    <!-- added d-flex and flex-column so i can use mt-auto on the trash section -->
+    <main class="col-12 col-lg-9 d-flex flex-column">
+      <div class="m-5 row justify-content-around">
+
+        <!-- todo start -->
+        <!-- col is mobile first, this means col-12 means that on mobile the element will take up all 12 bootstrap rows-->
+        <!-- mb-3 we haven't covered but it is specifying margin-bottom spacing -->
+        <div class="col-12  col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <!-- card-header is a card componenet. bg-dark and text-light are both Bootstrap color utility classes -->
+            <h4 class="card-header bg-dark text-light">
+              To Do
+            </h4>
+            <ul id="list-toDo" class="list-group list-group-flush">
+              <!-- this is where the generated tasks go -->
+            </ul>
+          </div>
+        </div>
+        <!-- todo end -->
+
+
+        <!-- in progress start -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light">
+              In Progress
+            </h4>
+            <ul id="list-inProgress" class="list-group list-group-flush">
+              <!-- this is where generated tasks go -->
+            </ul>
+          </div>
+        </div>
+        <!-- in progress end -->
+
+
+        <!-- in review start -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light">
+              In Review
+            </h4>
+            <ul id="list-inReview" class="list-group list-group-flush">
+              <!-- this is where generated tasks go -->
+            </ul>
+          </div>
+        </div>
+        <!-- in review end -->
+
+
+        <!-- done start -->
+        <div class="col-12 col-md-6 col-xl-3 mb-3">
+          <div class="card">
+            <h4 class="card-header bg-dark text-light">
+              Done
+            </h4>
+            <ul id="list-done" class="list-group list-group-flush">
+              <!-- this is where generated tasks go -->
+            </ul>
+          </div>
+        </div>
+        <!-- done end-->
       </div>
+
+
+      <!-- begin drag and drop trash-->
+      <!-- mt-auto pushes trash to the bottom -->
+      <div class="mt-auto" id="trash">
+        <div class="w-100 bg-danger p-3 text-center text-light display-4">
+          Drop Here to Remove.
+        </div>
+      </div>
+      <!-- end drag and drop trash -->
+
+
+
     </main>
   </div>
 
   <!-- Modal -->
+  <!-- notice how this id task-form-modal is being triggered in the button element near top of HTML using data-trigger="#task-form-modal"-->
   <div class="modal fade" id="task-form-modal" tabindex="-1" role="dialog" aria-labelledby="task-form-modal"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -46,11 +123,13 @@
           <form>
             <div class="form-group">
               <label for="modalTaskDescription">Task description</label>
-              <textarea id="modalTaskDescription" rows="3"></textarea>
+              <!-- the class "form-control" is a Bootstrap class for forms-->
+              <textarea id="modalTaskDescription" rows="3" class="form-control"></textarea>
             </div>
             <div class="form-group">
               <label for="modalDueDate">Due date</label>
-              <input type="text" id="modalDueDate" placeholder="mm/dd/yyyy" autocomplete="off" />
+              <!-- the class "form-control" is a Bootstrap class for forms-->
+              <input type="text" class="form-control" id="modalDueDate" placeholder="mm/dd/yyyy" autocomplete="off" />
             </div>
           </form>
         </div>
@@ -61,7 +140,7 @@
       </div>
     </div>
   </div>
-
+  <!-- because bootstrap uses jQuery and Popper we have to run those first -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
